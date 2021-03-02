@@ -4,6 +4,8 @@ const endTime = document.querySelector('.display__end-time');
 const button = document.querySelectorAll('[data-time]');
 
 function timer(seconds) {
+  // clear any existing timers
+  clearInterval(countdown);
   const now = Date.now();
   const then = now + seconds * 1000;
   displayTimeLeft(seconds);
@@ -46,3 +48,9 @@ function startTimer() {
 }
 
 button.forEach(button => button.addEventListener('click', startTimer));
+document.customForm.addEventListener('submit', function (e) {
+  e.preventDefault();
+  const mins = this.minutes.value; // using minutes from the form value
+  timer(mins * 60); // converting to seconds
+  this.reset();
+});
